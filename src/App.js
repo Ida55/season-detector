@@ -3,7 +3,8 @@ import './App.css';
 
 class App extends Component {
   state = { 
-    lat: null
+    lat: null,
+    errorMessage: ''
    };
 
   constructor(props) {
@@ -12,12 +13,18 @@ class App extends Component {
       position => {
         this.setState({lat: position.coords.latitude});
       },
-      err => console.log(err)
+      err => {
+        this.setState({ errorMessage: err.message });
+      }
     );
   }
 
   render() { 
-    return <div>Latitude: {this.state.lat}</div>;
+    return <div>
+      Latitude: {this.state.lat}
+      <br/>
+      Error: {this.state.errorMessage}
+      </div>;
   };
 }
  
